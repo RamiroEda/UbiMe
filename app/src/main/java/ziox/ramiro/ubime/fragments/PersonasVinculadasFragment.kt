@@ -37,9 +37,9 @@ class PersonasVinculadasFragment : Fragment() {
         queue.add(req)
 
         rootView.swipePersonasVinculadas.setOnRefreshListener {
+            showLoading(rootView)
             queue.add(req)
             rootView.swipePersonasVinculadas.isRefreshing = false
-            showLoading(rootView)
         }
 
         return rootView
@@ -74,33 +74,34 @@ class PersonasVinculadasFragment : Fragment() {
 
     private fun showLoading(rootView: View){
         activity?.runOnUiThread {
+            rootView.buttonAddPersona.visibility = View.GONE
             rootView.personasVinculadasProgressBar.visibility = View.VISIBLE
         }
     }
 
     private fun hideLoading(rootView: View){
         activity?.runOnUiThread {
+            rootView.buttonAddPersona.visibility = View.VISIBLE
             rootView.personasVinculadasProgressBar.visibility = View.GONE
         }
     }
 
     private fun showEmptyState(rootView: View){
         activity?.runOnUiThread {
-            rootView.buttonAddPersona.visibility = View.GONE
             rootView.emptyStatePersonasVinculadas.visibility = View.VISIBLE
         }
     }
 
     private fun hideEmptyState(rootView: View){
         activity?.runOnUiThread {
-            rootView.buttonAddPersona.visibility = View.VISIBLE
             rootView.emptyStatePersonasVinculadas.visibility = View.GONE
         }
     }
 
     inner class PersonasAdapter : RecyclerView.Adapter<PersonasAdapter.PersonasViewHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonasViewHolder {
-            return PersonasViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_personas_vinculadas, parent, false))
+            return PersonasViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_personas_vinculadas, parent, false))
         }
 
         override fun getItemCount(): Int {

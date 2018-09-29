@@ -97,6 +97,7 @@ class RegisterFragment : Fragment() {
                 rootView.registerPassword.editText?.text.toString().isNotEmpty() &&
                 rootView.registerConfirmPassword.editText?.text.toString().isNotEmpty() &&
                 rootView.registerName.editText?.text.toString().isNotEmpty()
+
     }
 
     private fun putErrors(rootView: View){
