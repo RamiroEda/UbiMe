@@ -1,6 +1,7 @@
 package ziox.ramiro.ubime.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.AttributeSet
 import android.view.View
 import ziox.ramiro.ubime.R
+import ziox.ramiro.ubime.Utils
 import ziox.ramiro.ubime.fragments.LoadingFragment
 import ziox.ramiro.ubime.fragments.LoginFragment
 import ziox.ramiro.ubime.fragments.RegisterFragment
@@ -24,12 +26,16 @@ class LoadingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.LoadingTheme)
         setContentView(R.layout.activity_loading)
 
-        Handler().postDelayed({
-            changeFragment(LOADING_LAYOUT)
-        }, 200)
+        changeFragment(LOADING_LAYOUT)
+
+        if(Utils.getToken(this).isNotEmpty()){
+            Handler().postDelayed({
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }, 4000)
+        }
     }
 
     fun changeFragment(fragmentName : Int){

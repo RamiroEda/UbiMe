@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_close_sesion"
-        android:title="Cerrar sesión"/>
+    <item android:id="@+id/menu_gen_qr"
+        android:title="Vincularme con otra persona"/>
     <item android:id="@+id/menu_about"
         android:title="Acerca de"/>
+    <item android:id="@+id/menu_close_sesion"
+        android:title="Cerrar sesión"/>
 </menu>

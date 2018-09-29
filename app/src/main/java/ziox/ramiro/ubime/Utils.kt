@@ -19,8 +19,16 @@ class Utils {
             return PreferenceManager.getDefaultSharedPreferences(context).getString("token", "")
         }
 
+        fun getUserId(context : Context?) : Int{
+            return PreferenceManager.getDefaultSharedPreferences(context).getInt("id", 0)
+        }
+
         fun validateEmail(email : String) : Boolean{
             return email.matches(Regex("[A-Za-z]+@[A-Za-z]+\\.[A-Za-z]+"))
+        }
+
+        fun dpToPixel(dp : Int, context: Context) : Int{
+            return (context.resources.displayMetrics.density * dp).toInt()
         }
     }
 }

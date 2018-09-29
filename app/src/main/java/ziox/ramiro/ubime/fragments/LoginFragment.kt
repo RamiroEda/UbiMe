@@ -86,6 +86,7 @@ class LoginFragment : Fragment(){
                         .putString("token", token).apply()
 
                 startActivity(Intent(activity, MainActivity::class.java))
+                activity?.finish()
             }catch (e : Exception){
                 Toast.makeText(activity, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show()
             }
