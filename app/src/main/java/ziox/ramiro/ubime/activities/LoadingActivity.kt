@@ -1,9 +1,12 @@
 package ziox.ramiro.ubime.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.AttributeSet
+import android.view.View
 import ziox.ramiro.ubime.R
 import ziox.ramiro.ubime.fragments.LoadingFragment
 import ziox.ramiro.ubime.fragments.LoginFragment
@@ -24,11 +27,9 @@ class LoadingActivity : AppCompatActivity() {
         setTheme(R.style.LoadingTheme)
         setContentView(R.layout.activity_loading)
 
-        changeFragment(LOADING_LAYOUT)
-
         Handler().postDelayed({
-            changeFragment(LOGIN_LAYOUT)
-        }, 1000)
+            changeFragment(LOADING_LAYOUT)
+        }, 200)
     }
 
     fun changeFragment(fragmentName : Int){
@@ -37,6 +38,14 @@ class LoadingActivity : AppCompatActivity() {
             LOGIN_LAYOUT -> LoginFragment()
             REGISTER_LAYOUT -> RegisterFragment()
             else -> Fragment()
-        }).commit()
+        }).commitAllowingStateLoss()
+    }
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.fragments.first() is RegisterFragment){
+            changeFragment(LOGIN_LAYOUT)
+        }else{
+            super.onBackPressed()
+        }
     }
 }
