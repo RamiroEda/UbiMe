@@ -40,6 +40,7 @@ class PerfilFragment : Fragment() {
                 R.id.menu_close_sesion -> {
                     PreferenceManager.getDefaultSharedPreferences(activity).edit().clear().apply()
                     startActivity(Intent(activity, LoadingActivity::class.java))
+                    activity?.finish()
                 }
                 R.id.menu_gen_qr -> {
                     QRGeneratorDialog().show(childFragmentManager, "qr_dialog")

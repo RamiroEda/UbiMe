@@ -38,7 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        initInterval(5)
+        initInterval(2)
     }
 
     private fun initInterval(intervalSeconds : Int){

@@ -85,7 +85,7 @@ class PersonasVinculadasFragment : Fragment() {
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     startActivity(Intent(activity, AddPersonaVinculadaActivity::class.java))
                 }else{
-                    activity!!.runOnUiThread {
+                    activity?.runOnUiThread {
                         Toast.makeText(activity, "Permisos no concedidos", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -144,7 +144,7 @@ class PersonasVinculadasFragment : Fragment() {
     }
 
     private fun showLoading(rootView: View){
-        activity!!.runOnUiThread {
+        activity?.runOnUiThread {
             rootView.buttonAddPersona.visibility = View.GONE
             hideEmptyState(rootView)
             rootView.personasVinculadasProgressBar.visibility = View.VISIBLE
@@ -152,20 +152,20 @@ class PersonasVinculadasFragment : Fragment() {
     }
 
     private fun hideLoading(rootView: View){
-        activity!!.runOnUiThread {
+        activity?.runOnUiThread {
             rootView.buttonAddPersona.visibility = View.VISIBLE
             rootView.personasVinculadasProgressBar.visibility = View.GONE
         }
     }
 
     private fun showEmptyState(rootView: View){
-        activity!!.runOnUiThread {
+        activity?.runOnUiThread {
             rootView.emptyStatePersonasVinculadas.visibility = View.VISIBLE
         }
     }
 
     private fun hideEmptyState(rootView: View){
-        activity!!.runOnUiThread {
+        activity?.runOnUiThread {
             rootView.emptyStatePersonasVinculadas.visibility = View.GONE
         }
     }

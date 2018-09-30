@@ -45,33 +45,39 @@
 
                     <TextView
                         android:id="@+id/personasLabelNombre"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:text="Nombre"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/personasLabelEstado"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/personasLabelEstado"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
                         android:text="Desconectado"
                         android:textColor="@color/colorDanger"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/personasLabelNombre"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/personasLabelNombre" />
+                        app:layout_constraintTop_toTopOf="@+id/personasLabelNombre" />
                 </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_weight="0"
+                    android:background="#DDD" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,10 +87,9 @@
 
                     <Button
                         android:id="@+id/buttonPersonaVer"
-                        style="@style/Widget.AppCompat.Button.Colored"
-                        android:layout_width="match_parent"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="Ver" />
 
                     <Button
@@ -94,7 +99,8 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorDanger"
                         android:text="Eliminar"
-                        android:textColor="@color/cardview_light_background" />
+                        android:textColor="@color/cardview_light_background"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </LinearLayout>
