@@ -26,7 +26,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var runnable: Runnable
     private lateinit var handler : Handler
     private var id: Int = 0
-    private var isDragged = false
+    private var isMoving = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        initInterval(2)
+        mMap.setOnCameraMoveListener {
+            isMoving = true
+        }
+
+        mMap.setOnCameraIdleListener {
+            isMoving = false
+        }
+        initInterval(1)
     }
 
     private fun initInterval(intervalSeconds : Int){
@@ -74,18 +81,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getRequest() : StringRequest{
         return StringRequest(Request.Method.GET, Utils.getAPIUrl()+"api/user_transport_ubication/$id",{
-            try{
-                positionMarkerMap.visibility = View.VISIBLE
-                val json = JSONObject(it)
-                mMap.animateCamera(
-                        CameraUpdateFactory.newCameraPosition(
-                                CameraPosition.fromLatLngZoom(
-                                        LatLng(json.getString("latitud").toDouble(),json.getString("longitud").toDouble()), 15f
-                                )
-                        )
-                )
-            }catch (e : Exception){
-                Log.e("asd", e.toString())
+            if(!isMoving){
+                try{
+                    val json = JSONObject(it)
+                    mMap.animateCamera(
+                            CameraUpdateFactory.newCameraPosition(
+                                    CameraPosition.fromLatLngZoom(
+                                            LatLng(json.getString("latitud").toDouble(),json.getString("longitud").toDouble()), 15f
+                                    )
+                            )
+                    )
+                }catch (e : Exception){
+                    Log.e("asd", e.toString())
+                }
             }
         },{
             Log.e("asd", it.toString())
